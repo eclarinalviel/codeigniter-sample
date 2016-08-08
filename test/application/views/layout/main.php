@@ -14,8 +14,8 @@
             
 		<!-- ADD VALUES -->
 		<h4> Contact us using the form below! </h4>
-		<div class="col-lg-12 col-md-12">
-                    <div class="col-lg-4 col-md-4">
+		<div class="col-lg-4 col-md-4">
+
                     <?php echo form_open('contact/new_message');?>
                         <input type="hidden" class="input" name="message_id" id="message_id" value="<?php if ( isset($msg) ) echo $msg[0]->ID;?>">
                         
@@ -27,7 +27,7 @@
                         
                         <button type="submit" class="btn btn-primary no-radius"><span class="glyphicon glyphicon-send"></span></button>
                     <?php echo form_close(); ?>
-                    </div>
+                   
 		</div>
 
 		<!-- DISPLAY VALUES -->

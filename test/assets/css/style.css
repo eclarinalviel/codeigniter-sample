@@ -27,12 +27,12 @@ div .panel {
 }
 
 .messages {
-    background-color: #ebebeb;
-    max-height: 250px;
+    height: 250px;
     overflow-y: scroll;
     
 }
 
 .alert-sm {
-    width: 20%;
+    max-width: 300px;
+    min-width: 200px;
 }
