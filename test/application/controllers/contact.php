@@ -7,6 +7,7 @@ class Contact extends CI_Controller {
             parent::__construct();
             $this->load->model('db_model');
             $this->load->helper('form');
+            $this->load->library('session');
         }
 	public function index($data = null) {
             
@@ -18,32 +19,36 @@ class Contact extends CI_Controller {
 	public function new_message() {
             
             $message_id = $this->input->post('message_id');
-
-            if ( !isset($message_id) || empty($message_id) ) { // on insert
-
-                $subject = $this->input->post('subject');
-                $message = $this->input->post('message');
-
-                $data = array(
-                    'subject' => $this->input->post('subject'),
-                    'message' => $this->input->post('message'),
-                    'status' => 1,
-                );
-
-                $this->db_model->form_insert($data);
-                $data['success'] = 'Data Inserted Successfully';
+            $subject = $this->input->post('subject');
+            $message = $this->input->post('message');
+            
+            if ( $this->session->has_userdata('logged_in') ) {
+                $user = $_SESSION['logged_in']; 
                 
-            } else { // on update
-                
-                $message_id = $this->input->post('message_id');
+                if ( !isset($message_id) || empty($message_id) ) { // on insert
+                    $data = array(
+                        'subject' => $subject,
+                        'message' => $message,
+                        'sender' => $user['username'],
+                        'status' => 1,
+                    );
 
-                $data = array(
-                    'subject' => $this->input->post('subject'),
-                    'message' => $this->input->post('message'),
-                );
-                $this->db_model->form_update($message_id, $data);
-                $data['success'] = 'Data Updated Successfully';
+                    $this->db_model->form_insert($data);
+                    $data['success'] = 'Data Inserted Successfully';
+
+                } else { // on update
+
+                    $message_id = $this->input->post('message_id');
+
+                    $data = array(
+                        'subject' => $subject,
+                        'message' => $message,
+                    );
+                    $this->db_model->form_update($message_id, $data);
+                    $data['success'] = 'Data Updated Successfully';
+                }
             }
+            $data['error'] = 'YOU NEED TO LOGIN FIRST!';
             
             $this->index($data);
 	}

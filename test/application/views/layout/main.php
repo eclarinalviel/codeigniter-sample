@@ -1,15 +1,14 @@
-<html>
-<head>
-	<title> Let's try CodeIgniter </title>
-        <link rel = "stylesheet" type = "text/css" href = "<?= base_url('assets/css/style.css'); ?>" />
-        <link rel = "stylesheet" type = "text/css" href = "<?= base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" />
-</head>
-<body>
+    <?= $this->load->view('layout/header', '', TRUE) ?>
+    <?= $this->load->view('layout/top', '', TRUE) ?>
+
 	<div class="col-lg-12 container">
-            
                 <?php if (isset($success)) { ?>
                     <div class="alert alert-success margin alert-sm" role="alert">
-                        <?php echo $success; ?>
+                        <b> <?php echo $success; ?> </b>
+                    </div>
+               <?php } elseif (isset($error)) {?>
+                    <div class="alert alert-danger margin alert-sm" role="alert">
+                        <b> <?php echo $error; ?> </b>
                     </div>
                <?php } ?>
             
@@ -56,6 +55,4 @@
                 
 	</div>
     
-
-</body>
-</html>
+<?= $this->load->view('layout/footer', '', TRUE) ?>
