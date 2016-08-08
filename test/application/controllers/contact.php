@@ -47,26 +47,33 @@ class Contact extends CI_Controller {
                     $this->db_model->form_update($message_id, $data);
                     $data['success'] = 'Data Updated Successfully';
                 }
+                $this->index($data);
+   
+            }  else {
+                $data['error'] = 'YOU NEED TO LOGIN FIRST!';
+                $this->index($data);
             }
-            $data['error'] = 'YOU NEED TO LOGIN FIRST!';
-            
-            $this->index($data);
+
 	}
         
         public function delete() {
             
-            if ( $this->input->post('action') == "delete" ) {
-                $message_id = $this->input->post('message_id');
-                $this->db_model->form_delete($message_id);
+            if ( $this->session->has_userdata('logged_in') ) {
+                if ( $this->input->post('action') == "delete" ) {
+                    $message_id = $this->input->post('message_id');
+                    $this->db_model->form_delete($message_id);
 
-                $data['success'] = 'Data Deleted Successfully';
+                    $data['success'] = 'Data Deleted Successfully';
 
-                $this->index($data);
+                    $this->index($data);
+                } else {
+
+                    $this->update();
+                }
             } else {
-                
-                $this->update();
+                $data['error'] = 'YOU NEED TO LOGIN FIRST!';
+                $this->index($data);
             }
-            
         }
         
         public function update() {

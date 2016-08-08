@@ -13,8 +13,9 @@
     <?php if ( $this->session->has_userdata('logged_in') ) {
         $user = $_SESSION['logged_in']; ?>
          
-        <label>Welcome <?php echo $user['username']; ?></label>
+        
         <?php echo form_open('auth/logout');?>
+            <label>Welcome, <?php echo $user['username']; ?>!</label>
             <button type="submit" class="btn btn-danger no-radius"><span class="glyphicon glyphicon-user"> Logout</span></button>
         <?php echo form_close(); ?>
 

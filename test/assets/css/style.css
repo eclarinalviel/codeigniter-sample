@@ -10,6 +10,7 @@ and open the template in the editor.
 
 div .panel {
     padding: 20px 20px 20px 20px;
+    
 }
 
 .no-radius {
@@ -27,6 +28,9 @@ div .panel {
 
 .messages {
     background-color: #ebebeb;
+    max-height: 250px;
+    overflow-y: scroll;
+    
 }
 
 .alert-sm {
