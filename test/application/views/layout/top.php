@@ -1,10 +1,10 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">MSG</a>
+        <a class="navbar-brand" href="<?= base_url('index.php/contact')?>">MSG</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="<?= base_url('index.php/contact')?>">Home</a></li>
       <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li> 
       <li><a href="#">Page 3</a></li> 
@@ -24,18 +24,19 @@
         <button type="submit" class="btn btn-primary no-radius" data-toggle="modal" data-target="#modal-signup"><span class="glyphicon glyphicon-user"> Signup</span></button>
     
       <?php } ?>
-  </div>
+  
     
-    <?php echo form_open('contact/search');?>
-    <div class="col-lg-2">
-        <div class="input-group">
-            <input type="text" class="form-control" name="keyword" placeholder="Search for...">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-default">Go!</button>
-            </span>
+        <?php echo form_open('contact/search');?>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <input type="text" class="form-control" name="keyword" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default">Go!</button>
+                </span>
+            </div>
         </div>
+        <?php echo form_close(); ?>
     </div>
-    <?php echo form_close(); ?>
 </nav>
 
 <!-- SIGNUP Modal -->
@@ -53,6 +54,7 @@
             <?php echo form_open('auth/signup');?>
             <input type="text" class="form-control" name="username">
             <input type="password" class="form-control" name="password">
+            
             <button type="submit" class="btn btn-primary">Submit</button>
             <?php echo form_close(); ?>
         </div>

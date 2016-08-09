@@ -22,7 +22,7 @@ class db_model extends CI_Model {
         $this->db->from('test');
         $query = $this->db->get();
         
-        return $query->result();
+        return $query->row();
     }
     
     public function form_insert($data = null) {

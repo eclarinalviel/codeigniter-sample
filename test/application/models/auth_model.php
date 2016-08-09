@@ -14,7 +14,7 @@ class auth_model extends CI_Model {
        $this->db->from('users');
        $query = $this->db->get();
         
-       return $query->result();
+       return $query->row();
     }
     
     public function signup( $data = null ) {

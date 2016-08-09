@@ -5,13 +5,11 @@ class Contact extends CI_Controller {
     
 	public function __construct() {
             parent::__construct();
-            $this->load->model('db_model');
-            $this->load->helper('form');
-            $this->load->library('session');
         }
 	public function index($data = null) {
             
             $data['messages'] = $this->db_model->get_posts();
+            
             $this->load->view('layout/main', $data);
             
 	}
@@ -56,24 +54,29 @@ class Contact extends CI_Controller {
 
 	}
         
-        public function delete() {
+        public function validate() {
             
-            if ( $this->session->has_userdata('logged_in') ) {
-                if ( $this->input->post('action') == "delete" ) {
-                    $message_id = $this->input->post('message_id');
-                    $this->db_model->form_delete($message_id);
-
-                    $data['success'] = 'Data Deleted Successfully';
-
-                    $this->index($data);
+            $session = $_SESSION['logged_in'];
+            $logged_user = $session['ID'];
+           
+            $message_id = $this->input->post('message_id');
+            $msg = $this->db_model->get_post($message_id);
+            
+            if ( $logged_user === $msg->sender ) {
+                
+                if ( $this->session->has_userdata('logged_in') ) {
+                   $this->todo();
+                   
                 } else {
-
-                    $this->update();
+                    $data['error'] = 'YOU NEED TO LOGIN FIRST!';
+                    $this->index($data);
                 }
+                
             } else {
-                $data['error'] = 'YOU NEED TO LOGIN FIRST!';
+                $data['error'] = 'YOU ARE NOT THE AUTHOR OF THIS POST !';
                 $this->index($data);
             }
+//           
         }
         
         public function update() {
@@ -92,6 +95,20 @@ class Contact extends CI_Controller {
 
             $this->index($data);
             
+        }
+        
+        public function todo() {
+            if ( $this->input->post('action') == "delete" ) {
+                $message_id = $this->input->post('message_id');
+                $this->db_model->form_delete($message_id);
+
+                $data['success'] = 'Data Deleted Successfully';
+
+                $this->index($data);
+            } else {
+
+                $this->update();
+            }
         }
 
 

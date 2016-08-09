@@ -4,26 +4,23 @@ class Auth extends CI_Controller {
     
 	public function __construct() {
             parent::__construct();
-           
-            $this->load->model('auth_model');
-            $this->load->model('db_model');
-            $this->load->helper('form');
-            $this->load->library('session');
+
         }
 
         public function login() {
+            
             $username = $this->input->post('username');
             $password = md5($this->input->post('password'));
             
             $result = $this->auth_model->login($username, $password);
             $data['messages'] = $this->db_model->get_posts();
             $data['success'] = 'Logged in Successfully';
-            
+
             if ( isset($result) && !empty($result) ) {
                 $session_data = array(
-                    'ID' => $result[0]->ID,
-                    'username' => $result[0]->username,
-                    'password' => $result[0]->password,
+                    'ID' => $result->user_ID,
+                    'username' => $result->username,
+                    'password' => $result->password,
                     'logged_in' => TRUE
                 );
             }
@@ -36,7 +33,7 @@ class Auth extends CI_Controller {
             
             $username = $this->input->post('username');
             $password = md5($this->input->post('password'));
-
+            
             $data = array(
                 'username' => $username,
                 'password' => $password,
@@ -57,5 +54,4 @@ class Auth extends CI_Controller {
             $data['messages'] = $this->db_model->get_posts();
             $this->load->view('layout/main', $data);
         }
-
 }
