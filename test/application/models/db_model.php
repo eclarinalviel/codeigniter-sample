@@ -10,6 +10,7 @@ class db_model extends CI_Model {
     public function get_posts() {
         $this->db->select("*"); 
         $this->db->from('test');
+        $this->db->join('users', 'users.user_ID = test.sender');
         $query = $this->db->get();
         
         return $query->result();

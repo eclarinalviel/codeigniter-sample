@@ -38,7 +38,7 @@
                         <div class="panel panel-primary">
                             <?php echo "<label class='output' name='subject'> Subject: " .$message->subject ; ?> </br>
                             <?php echo "<label class='output' name='message'> Message: " .$message->message; ?> </br>
-                            <small><?php echo "<label class='output' name='sender'> By: " .$message->sender; ?></small>
+                            <small><?php echo "<label class='output' name='sender'> By: " .$message->username; ?></small>
 
                             <?php echo form_open('contact/delete');?>
                                 <input type="hidden" class="input" name="message_id" id="message_id" value="<?php echo $message->ID ?>">

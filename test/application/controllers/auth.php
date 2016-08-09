@@ -21,6 +21,7 @@ class Auth extends CI_Controller {
             
             if ( isset($result) && !empty($result) ) {
                 $session_data = array(
+                    'ID' => $result[0]->ID,
                     'username' => $result[0]->username,
                     'password' => $result[0]->password,
                     'logged_in' => TRUE

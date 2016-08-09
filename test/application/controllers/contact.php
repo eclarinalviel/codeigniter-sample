@@ -24,12 +24,12 @@ class Contact extends CI_Controller {
             
             if ( $this->session->has_userdata('logged_in') ) {
                 $user = $_SESSION['logged_in']; 
-                
+
                 if ( !isset($message_id) || empty($message_id) ) { // on insert
                     $data = array(
                         'subject' => $subject,
                         'message' => $message,
-                        'sender' => $user['username'],
+                        'sender' => $user['ID'],
                         'status' => 1,
                     );
 
