@@ -84,7 +84,15 @@ class Contact extends CI_Controller {
             $this->index($data);
             
         }
+        
+        public function search() {
+        
+            $keyword = $this->input->post('keyword');
+            $data['messages'] = $this->db_model->search($keyword);
 
+            $this->index($data);
+            
+        }
 
 
 }

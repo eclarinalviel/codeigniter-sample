@@ -38,5 +38,10 @@ class db_model extends CI_Model {
         $this->db->update('test', $data);
     }
     
+    public function search( $keyword = null ) {
+        $this->db->like('subject', $keyword);
+        $this->db->or_like('message', $keyword);
+    }
+    
  
 }

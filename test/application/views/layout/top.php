@@ -25,6 +25,17 @@
     
       <?php } ?>
   </div>
+    
+    <?php echo form_open('contact/search');?>
+    <div class="col-lg-2">
+        <div class="input-group">
+            <input type="text" class="form-control" name="keyword" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-default">Go!</button>
+            </span>
+        </div>
+    </div>
+    <?php echo form_close(); ?>
 </nav>
 
 <!-- SIGNUP Modal -->
