@@ -23,7 +23,9 @@ class Account extends CI_Controller {
         
         public function do_upload()
         {
-            $user = $_SESSION['logged_in']; 
+            $user = $_SESSION['logged_in'];
+            $this->remove_existing_image($user['ID']);
+            
             $new_name = $user['ID'].'-'.$_FILES['userfile']['name'];
 
             $config['upload_path']          = './uploads/';
@@ -51,11 +53,20 @@ class Account extends CI_Controller {
                     $this->file_model->add_image($user['ID'], $file );
                     
                     $data['image'] = $this->file_model->get_image( $user['ID'] );
+
                     $this->load->view('layout/account', $data);
             }
         }
         
-       
+       public function remove_existing_image( $user_id = null ) {
+           
+            $data['image'] = $this->file_model->get_image( $user_id );
+            $path = FCPATH."uploads/".$data['image']->file; 
+            $path_replace = str_replace('/', '\\', $path);
+            
+//            var_dump($path_replace); exit;
+            unlink($path_replace);
+       }
 
 	
 }
