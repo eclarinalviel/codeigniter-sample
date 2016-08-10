@@ -21,11 +21,16 @@ class Auth extends CI_Controller {
                     'ID' => $result->user_ID,
                     'username' => $result->username,
                     'password' => $result->password,
+                    'registration_date' => $result->registration_date,
                     'logged_in' => TRUE
                 );
+                $this->session->set_userdata('logged_in', $session_data);
             }
             
-            $this->session->set_userdata('logged_in', $session_data);
+            if ( $this->session->has_userdata('logged_in') ) {
+                $user = $_SESSION['logged_in']; 
+                $data['image'] = $this->file_model->get_image( $user['ID'] );
+            }
             $this->load->view('layout/main', $data);
         }
         

@@ -36,3 +36,13 @@ div .panel {
     max-width: 300px;
     min-width: 200px;
 }
+
+.list-group-item {
+    color: #000;
+}
+
+.img-sm {
+    height: 50px;
+    width: 50px;
+}
+

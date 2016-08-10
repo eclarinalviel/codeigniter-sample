@@ -141,5 +141,6 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'db_model',
-    'auth_model'
+    'auth_model',
+    'file_model'
 );

@@ -10,6 +10,10 @@ class Contact extends CI_Controller {
             
             $data['messages'] = $this->db_model->get_posts();
             
+            if ( $this->session->has_userdata('logged_in') ) {
+                $user = $_SESSION['logged_in']; 
+                $data['image'] = $this->file_model->get_image( $user['ID'] );
+            }
             $this->load->view('layout/main', $data);
             
 	}
